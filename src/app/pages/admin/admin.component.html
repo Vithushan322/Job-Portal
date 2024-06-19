@@ -1,0 +1,32 @@
+<h1>Admin Page</h1>
+<form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+  <label for="title">Job Title</label>
+  <input id="title" formControlName="title" />
+  <div *ngIf="jobForm.get('title').invalid && jobForm.get('title').touched">
+    Job title is required
+  </div>
+
+  <label for="description">Job Description</label>
+  <textarea id="description" formControlName="description"></textarea>
+  <div *ngIf="jobForm.get('description').invalid && jobForm.get('description').touched">
+    Job description is required
+  </div>
+
+  <label for="category">Category</label>
+  <select id="category" formControlName="category">
+    <option value="frontend">Front End</option>
+    <option value="backend">Back End</option>
+    <option value="fullstack">Full Stack</option>
+    <option value="all">All</option>
+  </select>
+
+  <button type="submit" [disabled]="jobForm.invalid">Submit</button>
+</form>
+
+<ul>
+  <li *ngFor="let job of jobs | async">
+    {{ job.title }} - {{ job.category }}
+    <button (click)="editJob(job)">Edit</button>
+    <button (click)="deleteJob(job.id)">Delete</button>
+  </li>
+</ul>

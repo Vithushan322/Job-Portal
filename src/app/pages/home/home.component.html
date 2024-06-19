@@ -1,0 +1,13 @@
+<h1>Job Listings</h1>
+<select (change)="filterJobs($event)">
+  <option value="all">All</option>
+  <option value="frontend">Front End</option>
+  <option value="backend">Back End</option>
+  <option value="fullstack">Full Stack</option>
+</select>
+
+<ul>
+  <li *ngFor="let job of filteredJobs | async">
+    {{ job.title }} - {{ job.category }}
+  </li>
+</ul>
